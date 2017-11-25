@@ -4,6 +4,7 @@ import Dashboard from './Dashboard';
 import Header from "./Header";
 import Footer from "./Footer";
 import Counter from "./Counter";
+import ToDo from "./Todo";
 
 const App = () => {
     return (
@@ -22,9 +23,9 @@ const App = () => {
                     </li>
                 </ul>
                 <Footer/>
-                <Route path='/' component={Dashboard} />
-                <Route path='/todo' component={Counter} />
-                <Route path='/counter' component={null} />
+                <Route exact path='/' component={Dashboard} />
+                <Route path='/todo' component={ToDo} />
+                <Route path='/counter' component={Counter} />
             </div>
         </Router>
     )
