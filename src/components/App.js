@@ -5,6 +5,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import Counter from "./Counter";
 import ToDo from "./Todo";
+import Form from "./form/index";
 
 const App = () => {
     return (
@@ -21,11 +22,15 @@ const App = () => {
                     <li>
                         <Link to="/counter">Licznik</Link>
                     </li>
+                    <li>
+                        <Link to="/form">Form</Link>
+                    </li>
                 </ul>
-                <Footer/>
                 <Route exact path='/' component={Dashboard} />
                 <Route path='/todo' component={ToDo} />
                 <Route path='/counter' component={Counter} />
+                <Route path='/form' component={Form} />
+                <Footer/>
             </div>
         </Router>
     )
