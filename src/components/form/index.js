@@ -6,22 +6,24 @@ class Form extends Component {
         this.handleTitle = this.handleTitle.bind(this);
         this.handleContent = this.handleContent.bind(this);
         this.handleCategory = this.handleCategory.bind(this);
+        this.submitForm = this.submitForm.bind(this);
         this.state = {
-            title: 'sfasd',
-            content: 'fasd',
-            category: 'fasd'
+            title: '',
+            content: '',
+            category: ''
         }
     }
 
     handleTitle(event) {
-      this.setState({
-          title: event.target.value
-      })
+        this.setState({
+            title: event.target.value
+        })
     }
 
     handleContent(event) {
         this.setState({
-            content: event.target.value
+            content: event.target.value,
+            kluczNowy: "test"
         })
     }
 
@@ -32,28 +34,38 @@ class Form extends Component {
     }
 
     submitForm(event) {
-        console.log("wyslane")
+
+        console.log(this.state);
+        event.preventDefault();
+
+
     }
 
     render() {
         return (
             <div>
                 <form onSubmit={this.submitForm}>
-                    <h3>{this.state.title}</h3>
+                    <h3>{this.state.title ? 'PROMOCJA! ' + this.state.title : ''}</h3>
                     <p>{this.state.content}</p>
                     <p>{this.state.category}</p>
                     <label>
                         Name:
                         <input type='text' onChange={this.handleTitle}/>
-                        <textarea onChange={this.handleContent}/>
-                        <select onChange={this.handleCategory}>
-                            <option>Opcja 1</option>
-                            <option>Opcja 2</option>
-                            <option>Opcja 3</option>
-                            <option>Opcja 4</option>
-                        </select>
+                        <div>
+                            <textarea onChange={this.handleContent}/>
+                        </div>
+                        <div>
+                            <select onChange={this.handleCategory}>
+                                <option>Opcja 1</option>
+                                <option>Opcja 2</option>
+                                <option>Opcja 3</option>
+                                <option>Opcja 4</option>
+                            </select>
+                        </div>
                     </label>
-                    <input type='submit' value='Submit'/>
+                    <div>
+                        <input type='submit' value='Wyślij mnie! '/>
+                    </div>
                 </form>
             </div>
         )

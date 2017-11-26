@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
 import Button from "./button";
 import { Link } from 'react-router-dom';
+import Search from "./serch";
 
 class Header extends Component {
     render() {
         return (
             <div>
+                <Search/>
                 <h1>Lista zadań</h1>
                 <ul>
                     <li><Link to="/">Home</Link></li>

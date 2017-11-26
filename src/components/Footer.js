@@ -4,7 +4,7 @@ class Footer extends Component {
     render() {
         return (
             <div>
-                Jakas stopka
+                &copy; Henryk Krzyszczak
             </div>
         )
     }
