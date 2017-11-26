@@ -17,7 +17,7 @@ class Search extends Component {
         return(
             <div>
                 <form onSubmit={this.handleSubmit}>
-                    <input type="text" ref={field => this.search = field}/>
+                    <input type="text" defaultValue='Szukaj'  ref={field => this.search = field}/>
                     <button>Szukaj</button>
                 </form>
             </div>
