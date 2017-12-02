@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import Button from "./button";
+import Button from "./Button";
 import { Link } from 'react-router-dom';
-import Search from "./serch";
+import Search from "./Serch";
 
 class Header extends Component {
     render() {
@@ -14,6 +14,8 @@ class Header extends Component {
                     <li><Link to="/todo">Lista zadan</Link></li>
                     <li><Link to="/counter">Licznik</Link></li>
                     <li><Link to="/form">Form</Link></li>
+                    <li><Link to="/users">Users</Link></li>
+
                 </ul>
                 <Button label='OK'/>
             </div>

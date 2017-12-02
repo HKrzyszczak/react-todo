@@ -8,11 +8,11 @@ class Button extends Component {
             color: 'yellow',
             fontSize: 20
         }
-      return(
-          <div className="btn-container">
-              <button style={buttonStyle}>{this.props.label}</button>
-          </div>
-      )
+        return(
+            <div className="btn-container">
+                <button style={buttonStyle}>{this.props.label}</button>
+            </div>
+        )
     };
 }
 
