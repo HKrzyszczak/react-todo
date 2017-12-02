@@ -19,11 +19,10 @@ class Users extends Component {
 
     fetchData() {
         this.setState({loading: true});
-        fetch('https://jsonplaceholder.typicode.com/users')
+        fetch('/users')
             .then( (response) =>  response.json())
             .then((data) => {
-                this.setState({loading: false});
-               return this.setState({userTable: data});
+                this.setState({loading: false, userTable: data});
             })
     }
 
