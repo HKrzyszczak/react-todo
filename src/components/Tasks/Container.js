@@ -1,14 +1,16 @@
 import React, {Component} from 'react';
-import Task from "./Task";
+import TasksList from "./TasksList";
 
 class Container extends Component {
     constructor(props) {
         super(props);
         this.textChanged = this.textChanged.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.filtrTasks = this.filtrTasks.bind(this);
         this.state = {
             task: '',
             tasks: [],
+            filter: '',
         }
     }
 
@@ -25,22 +27,35 @@ class Container extends Component {
         event.preventDefault();
     }
 
+    filtrTasks(event) {
+        this.setState({
+            filter: event.target.value,
+        })
+    }
+
     render() {
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
+                    <div>
+                    <input type='text'
+                           placeholder='Search'
+                           onChange={this.filtrTasks} />
+                    </div>
+                    <div>
                     <input type='text'
                            value={this.state.task}
                            placeholder='Add task...'
-                           onChange={this.textChanged}/>
+                           onChange={this.textChanged} />
+
                     <input type='submit'
-                           value='Add'/>
+                           value='Add' />
+                    </div>
                 </form>
                 <h2>My tasks:</h2>
-                {this.state.tasks.map((task, index) => (
-                       <Task key={index} label={task}/>
-                    )
-                )}
+                <TasksList tasks={this.state.tasks}
+                           filter={this.state.filter}
+                    />
             </div>
         )
     }
