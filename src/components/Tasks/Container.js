@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
+import Task from "./Task";
 
 class Container extends Component {
     constructor(props) {
@@ -12,7 +13,7 @@ class Container extends Component {
     }
 
     textChanged(event) {
-        this.setState({task: event.target.value });
+        this.setState({task: event.target.value});
     }
 
     handleSubmit(event) {
@@ -28,12 +29,16 @@ class Container extends Component {
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
-                    <input type='text' placeholder='Add task...' onChange={this.textChanged} />
-                    <input type='submit' value='Add' />
+                    <input type='text'
+                           value={this.state.task}
+                           placeholder='Add task...'
+                           onChange={this.textChanged}/>
+                    <input type='submit'
+                           value='Add'/>
                 </form>
                 <h2>My tasks:</h2>
                 {this.state.tasks.map((task, index) => (
-                    <div key={index}>{task}</div>
+                       <Task key={index} label={task}/>
                     )
                 )}
             </div>
