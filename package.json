@@ -2,18 +2,24 @@
   "name": "todo",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://HKrzyszczak.github.io/react-todo",
   "dependencies": {
+    "gh-pages": "^1.1.0",
+    "material-ui": "^1.0.0-beta.26",
+    "material-ui-icons": "^1.0.0-beta.17",
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
     "react-router-dom": "^4.2.2",
-    "react-scripts": "1.0.17"
+    "react-scripts": "1.0.17",
+    "typeface-roboto": "0.0.45"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
   "proxy": "https://jsonplaceholder.typicode.com"
-
 }
