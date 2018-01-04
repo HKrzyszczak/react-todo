@@ -1,0 +1,1 @@
+{"version":3,"sources":["components/Header/index.css"],"names":[],"mappings":"AAAA,eACI,YACA,wBAA8B","file":"static/css/main.7ceeb418.css","sourcesContent":[".btn-container {\r\n    margin: 20px;\r\n    background-color: greenyellow;\r\n}\n\n\n// WEBPACK FOOTER //\n// ./src/components/Header/index.css"],"sourceRoot":""}
