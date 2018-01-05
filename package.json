@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://HKrzyszczak.github.io/react-todo",
   "dependencies": {
+    "firebase": "^4.8.1",
     "gh-pages": "^1.1.0",
     "material-ui": "^1.0.0-beta.26",
     "material-ui-icons": "^1.0.0-beta.17",
