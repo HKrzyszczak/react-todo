@@ -39,7 +39,10 @@ class AddBox extends Component {
     handleClickAdd = () => {
         if (this.state.inputText.length > 0 ) {
         database.ref('/tasks')
-        .push( {name: this.state.inputText})
+        .push( {
+          name: this.state.inputText,
+          checked: false,        
+        })
         .then(() => {
             console.log('Saved :-)');
             this.setState({
@@ -50,6 +53,7 @@ class AddBox extends Component {
         }
     };  
 
+   
 
     render() {
         const { classes } = this.props;

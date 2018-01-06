@@ -1,17 +1,14 @@
 import React, {Component} from 'react';
 import AddBox from './AddBox.js';
 import { database } from "../../firebase/firebase";
+import TasksList from './TasksList';
 
 class ToDo extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            tasks: [
-                
-            ],
-            cos: [
-                1, 2, 3
-            ]
+            tasks: [],
+           
         }
     }
     componentDidMount() {
@@ -23,6 +20,7 @@ class ToDo extends Component {
                   newState.push({
                     id: item,
                     name: items[item].name,
+                    checked: items[item].checked,
                     
                   });
                 }
@@ -30,21 +28,26 @@ class ToDo extends Component {
                   tasks: newState});
             });
     };
+
+    handleToggleCheck = (id, checked) => {
+        database.ref('/tasks/' + id)
+        .set({
+              checked: !checked,
+        })
+        .then(() => {
+          console.log('Saved :-)');
+          this.setState({
+              inputText: '',
+          })
+      })
+      .catch(() => console.log('ERROR! Nothing saved!!!'))
+      };
+
     render() {
         return (
-            <div>
-                <h2>My to Do list</h2>
-                <ol>
-                    {this.state.tasks.map((tasks) => {
-                      return  (<div>
-                          <li key={tasks.id}>{tasks.name}</li>
-                          
-                          </div>
-                      )
-                    })}
-                </ol>
-                
+            <div>                       
                 <AddBox />
+                <TasksList tasks = {this.state.tasks} toggleCheck= {this.handleToggleCheck} />
             </div>
         );
     }
