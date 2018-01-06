@@ -4,9 +4,7 @@ import { withStyles } from 'material-ui/styles';
 import IconButton from 'material-ui/IconButton';
 import Input, { InputLabel, InputAdornment } from 'material-ui/Input';
 import { FormControl } from 'material-ui/Form';
-import Save from 'material-ui-icons/Save';
-import { database } from "../../firebase/firebase";
-
+import Clear from 'material-ui-icons/Clear';
 
 const styles = theme => ({
     container: {
@@ -23,7 +21,7 @@ const styles = theme => ({
     },
   });
 
-class AddBox extends Component {
+class FilterBox extends Component {
     state = {
         inputText: '',
     };
@@ -36,24 +34,11 @@ class AddBox extends Component {
         event.preventDefault();
     };
     
-    handleClickAdd = () => {
-        if (this.state.inputText.length > 0 ) {
-        database.ref('/tasks')
-        .push( {
-          name: this.state.inputText,
-          checked: false,        
-        })
-        .then(() => {
-            console.log('Saved :-)');
-            this.setState({
-                inputText: '',
-            })
-        })
-        .catch(() => console.log('ERROR! Nothing saved!!!'))
-        }
+    handleClickClear = () => {
+        this.setState({
+            inputText: '',
+        });
     };  
-
-   
 
     render() {
         const { classes } = this.props;
@@ -69,11 +54,10 @@ class AddBox extends Component {
               endAdornment={
                 <InputAdornment position="end">
                   <IconButton
-                    onClick={this.handleClickAdd}
+                    onClick={this.handleClickClear}
                     onMouseDown={this.handleMouseDownAdd}
-                    color= "primary"
                   >
-                     <Save />
+                     <Clear color="primary"/>
                   </IconButton>
                 </InputAdornment>
               }
@@ -83,8 +67,8 @@ class AddBox extends Component {
     }
 }
 
-AddBox.propTypes = {
+FilterBox.propTypes = {
     classes: PropTypes.object.isRequired,
   };
   
-  export default withStyles(styles)(AddBox);
+  export default withStyles(styles)(FilterBox);

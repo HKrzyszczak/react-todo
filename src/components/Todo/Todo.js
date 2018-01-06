@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import AddBox from './AddBox.js';
 import { database } from "../../firebase/firebase";
 import TasksList from './TasksList';
+import FilterBox from './FilterBox';
 
 class ToDo extends Component {
     constructor(props) {
@@ -45,8 +46,13 @@ class ToDo extends Component {
 
     render() {
         return (
-            <div>                       
+            <div>
+                <div>                       
                 <AddBox />
+                </div>
+                <div>
+                <FilterBox />
+                </div>
                 <TasksList tasks = {this.state.tasks} toggleCheck= {this.handleToggleCheck} />
             </div>
         );
