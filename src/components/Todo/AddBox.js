@@ -7,7 +7,6 @@ import { FormControl } from 'material-ui/Form';
 import Save from 'material-ui-icons/Save';
 import { database } from "../../firebase/firebase";
 
-
 const styles = theme => ({
     container: {
       display: 'flex',
@@ -21,8 +20,7 @@ const styles = theme => ({
     menu: {
       width: 250,
     },
-  });
-
+});
 class AddBox extends Component {
     state = {
         inputText: '',
@@ -51,9 +49,14 @@ class AddBox extends Component {
         })
         .catch(() => console.log('ERROR! Nothing saved!!!'))
         }
+    };
+    
+    catchReturn = (ev) => {      
+      if (ev.key === 'Enter') {
+        this.handleClickAdd();
+        ev.preventDefault();
+      }
     };  
-
-   
 
     render() {
         const { classes } = this.props;
@@ -66,12 +69,13 @@ class AddBox extends Component {
               type={ 'text' }
               value={this.state.inputText}
               onChange={this.handleChange('inputText')}
+              onKeyPress={ this.catchReturn}
               endAdornment={
                 <InputAdornment position="end">
                   <IconButton
-                    onClick={this.handleClickAdd}
+                    onClick={this.handleClickAdd}                    
                     onMouseDown={this.handleMouseDownAdd}
-                    color= "primary"
+                    color="primary"
                   >
                      <Save />
                   </IconButton>
@@ -85,6 +89,6 @@ class AddBox extends Component {
 
 AddBox.propTypes = {
     classes: PropTypes.object.isRequired,
-  };
+};
   
-  export default withStyles(styles)(AddBox);
+ export default withStyles(styles)(AddBox);

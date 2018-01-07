@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import PropTypes from 'prop-types'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import IconButton from 'material-ui/IconButton';
 import Input, { InputLabel, InputAdornment } from 'material-ui/Input';
@@ -14,10 +14,10 @@ const styles = theme => ({
     textField: {
       marginLeft: theme.spacing.unit,
       marginRight: theme.spacing.unit,
-      width: 250,
+      width: 200,
     },
     menu: {
-      width: 250,
+      width: 200,
     },
   });
 
@@ -33,24 +33,30 @@ class FilterBox extends Component {
     handleMouseDownAdd = event => {
         event.preventDefault();
     };
+
+    handleChangeFilter = event => {
+        this.setState({inputText: event.target.value}, this.setParentFilter)
+    }
     
     handleClickClear = () => {
         this.setState({
             inputText: '',
-        });
+        }, this.setParentFilter);
     };  
 
+    setParentFilter = () => this.props.changeFilter(this.state.inputText); 
+    
     render() {
         const { classes } = this.props;
 
         return (
             <FormControl className={classes.formControl}>
-            <InputLabel htmlFor="inputField">Add task</InputLabel>
+            <InputLabel htmlFor="inputField">Find</InputLabel>
             <Input
               id="inputField"
-              type={ 'text' }
+              type={'text'}
               value={this.state.inputText}
-              onChange={this.handleChange('inputText')}
+              onChange={this.handleChangeFilter}
               endAdornment={
                 <InputAdornment position="end">
                   <IconButton
@@ -69,6 +75,6 @@ class FilterBox extends Component {
 
 FilterBox.propTypes = {
     classes: PropTypes.object.isRequired,
-  };
+};
   
-  export default withStyles(styles)(FilterBox);
+export default withStyles(styles)(FilterBox);

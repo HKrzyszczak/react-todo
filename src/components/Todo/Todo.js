@@ -9,6 +9,7 @@ class ToDo extends Component {
         super(props);
         this.state = {
             tasks: [],
+            fiterText: '',
            
         }
     }
@@ -30,6 +31,10 @@ class ToDo extends Component {
             });
     };
 
+    setFilterText = (fiterText) => {
+        this.setState({fiterText: fiterText})
+    };
+
     handleToggleCheck = (id, checked) => {
         database.ref('/tasks/' + id)
         .set({
@@ -43,6 +48,7 @@ class ToDo extends Component {
       })
       .catch(() => console.log('ERROR! Nothing saved!!!'))
       };
+    
 
     render() {
         return (
@@ -51,9 +57,13 @@ class ToDo extends Component {
                 <AddBox />
                 </div>
                 <div>
-                <FilterBox />
+                <FilterBox changeFilter={this.setFilterText}/>
                 </div>
-                <TasksList tasks = {this.state.tasks} toggleCheck= {this.handleToggleCheck} />
+                <TasksList 
+                    tasks = {this.state.tasks.filter(
+                        (el) => {
+                        return el.name.search(this.state.fiterText) !== -1; 
+                        })} />
             </div>
         );
     }

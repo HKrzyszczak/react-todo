@@ -15,10 +15,6 @@ const styles = theme => ({
     background: theme.palette.background.paper,
   },
 });
-
-
-
-
 class TasksList extends React.Component {
   state = {
     checked: [0],
@@ -52,7 +48,8 @@ class TasksList extends React.Component {
     return (
       <div className={classes.root}>
         <List>
-          {this.props.tasks.map(task => (
+          {this.props.tasks                
+            .map(task => (
             <ListItem
               key={task.id}
               dense
@@ -67,10 +64,10 @@ class TasksList extends React.Component {
                 disableRipple
               />
               <ListItemText primary={task.name}
-                            style={task.checked?{textDecoration: 'line-through'}:null } />
+                            style={task.checked?{textDecoration: 'line-through', fontSize: 20}:{fontSize: 20} } />
               <ListItemSecondaryAction>
                 <IconButton 
-                  aria-label="Delete"
+                  aria-label='Delete'
                   onClick={() => this.handleDelete(task.id)}
                 >
                   <DeleteIcon color= 'primary'/>
