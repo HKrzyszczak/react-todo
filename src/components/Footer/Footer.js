@@ -1,11 +1,15 @@
 import React, {Component} from 'react';
+import Typography from 'material-ui/Typography';
 
 class Footer extends Component {
     render() {
         return (
-            <div>
+            <Typography type="body2" 
+                        gutterBottom
+                        align="center"
+                        >
                 &copy; Henryk Krzyszczak
-            </div>
+            </Typography>               
         )
     }
 }
