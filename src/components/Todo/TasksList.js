@@ -84,7 +84,7 @@ class TasksList extends React.Component {
 
     return (
       <div className={classes.root}>
-        <List>
+        <List align="left">
           {this.props.tasks                
             .map(task => (
             <ListItem
