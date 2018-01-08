@@ -5,6 +5,7 @@ import ToDo from "./Todo";
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import Card, { CardContent } from 'material-ui/Card';
+import Grid from 'material-ui/Grid';
 
 const styles = theme => ({
     card: {
@@ -17,7 +18,13 @@ const styles = theme => ({
 const App = (props) => {
     const { classes } = props;
     return (
-        <Card className={classes.card}
+        <Grid 
+            container
+            justify= "center"
+            >
+        <Grid xs={6}>
+        <Card 
+            className={classes.card}
             align="center">
         <CardContent align="center">
                 <Header/>
@@ -25,6 +32,8 @@ const App = (props) => {
                 <Footer/>
         </CardContent>
         </Card>
+        </Grid>
+        </Grid>
     )
 };
 
