@@ -21,9 +21,10 @@ const styles = theme => ({
       width: 250,
     },
 });
-class AddBox extends Component {
+class EditBox extends Component {
     state = {
         inputText: '',
+        task:[],
     };
 
     handleChange = prop => event => {
@@ -33,19 +34,23 @@ class AddBox extends Component {
     handleMouseDownAdd = event => {
         event.preventDefault();
     };
+
+    componentDidMount() {
+      this.setState({
+        inputText: this.props.task.name,
+        task: this.props.task,})
+    }
     
-    handleClickAdd = () => {
+    handleClickSave = () => {
         if (this.state.inputText.length > 0 ) {
-        database.ref('/tasks')
-        .push( {
+        database.ref('/tasks/' + this.state.task.id)
+        .set( {
           name: this.state.inputText,
-          checked: false,        
+          checked: this.state.task.checked,        
         })
         .then(() => {
             console.log('Saved :-)');
-            this.setState({
-                inputText: '',
-            })
+            this.props.resetEditId();                        
         })
         .catch(() => console.log('ERROR! Nothing saved!!!'))
         }
@@ -53,7 +58,7 @@ class AddBox extends Component {
     
     catchReturn = (ev) => {      
       if (ev.key === 'Enter') {
-        this.handleClickAdd();
+        this.handleClickSave();
         ev.preventDefault();
       }
     };  
@@ -63,18 +68,18 @@ class AddBox extends Component {
 
         return (
             <FormControl className={classes.formControl}>
-            <InputLabel htmlFor="inputField">Add task</InputLabel>
+            <InputLabel htmlFor="inputField">Rename task</InputLabel>
             <Input
               id="inputField"
-              autoFocus
               type="text"
+              autoFocus
               value={this.state.inputText}
               onChange={this.handleChange('inputText')}
-              onKeyPress={ this.catchReturn}
+              onKeyPress={this.catchReturn} 
               endAdornment={
                 <InputAdornment position="end">
                   <IconButton
-                    onClick={this.handleClickAdd}                    
+                    onClick={this.handleClickSave}                    
                     onMouseDown={this.handleMouseDownAdd}
                     color="primary"
                   >
@@ -88,8 +93,8 @@ class AddBox extends Component {
     }
 }
 
-AddBox.propTypes = {
+EditBox.propTypes = {
     classes: PropTypes.object.isRequired,
 };
   
- export default withStyles(styles)(AddBox);
+ export default withStyles(styles)(EditBox);

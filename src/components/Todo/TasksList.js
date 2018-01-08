@@ -5,7 +5,9 @@ import List, { ListItem, ListItemSecondaryAction, ListItemText } from 'material-
 import Checkbox from 'material-ui/Checkbox';
 import IconButton from 'material-ui/IconButton';
 import DeleteIcon from 'material-ui-icons/Delete';
+import Clear from 'material-ui-icons/Clear';
 import { database } from '../../firebase/firebase';
+import EditBox from './EditBox';
 
 
 const styles = theme => ({
@@ -17,10 +19,8 @@ const styles = theme => ({
 });
 class TasksList extends React.Component {
   state = {
-    checked: [0],
+    idEditedField: '',
   };
-
-  
 
   handleDelete = (id) => {
     database.ref('/tasks/' + id)
@@ -35,12 +35,49 @@ class TasksList extends React.Component {
           })
           .then(() => {
             console.log('Saved :-)');
-            this.setState({
-                inputText: '',
-            })
         })
         .catch(() => console.log('ERROR! Nothing saved!!!'))
         };
+  
+  handleInlineEdit = (idEditedField) => {
+    this.setState({
+      idEditedField: idEditedField, 
+    })
+  }
+
+  returnEditOrText = (task) => {
+    return  this.state.idEditedField !== task.id?(
+      <ListItemText primary={task.name}
+                            style={task.checked?{textDecoration: 'line-through', fontSize: 20}:{fontSize: 20} } />
+    ):( <EditBox 
+        task={task}
+        resetEditId={this.resetIdEditedField}
+       />)
+  }
+
+  returnClearOrDelete = (task) => {
+    return this.state.idEditedField !== task.id?(
+      <IconButton 
+                  aria-label='Delete'
+                  onClick={() => this.handleDelete(task.id)}
+                >
+                  <DeleteIcon color= 'primary'/>
+                </IconButton>
+    ):(
+      <IconButton 
+                  aria-label='Clear'
+                  onClick={this.resetIdEditedField}
+                >
+                  <Clear color= 'primary'/>
+                </IconButton>
+    )
+  }
+
+  resetIdEditedField = () => {
+    this.setState({
+      idEditedField: '',
+    })
+  }
 
   render() {
     const { classes } = this.props;
@@ -54,24 +91,18 @@ class TasksList extends React.Component {
               key={task.id}
               dense
               button
-              onClick={null}
+              onDoubleClick={() => this.handleInlineEdit(task.id)}
               className={classes.listItem}
             >
               <Checkbox
                 checked={task.checked}
-                onClick={() => this.handleCheck(task)}                
+                onClick={() => this.handleCheck(task)}                               
                 tabIndex={-1}
                 disableRipple
               />
-              <ListItemText primary={task.name}
-                            style={task.checked?{textDecoration: 'line-through', fontSize: 20}:{fontSize: 20} } />
+              { this.returnEditOrText(task) }              
               <ListItemSecondaryAction>
-                <IconButton 
-                  aria-label='Delete'
-                  onClick={() => this.handleDelete(task.id)}
-                >
-                  <DeleteIcon color= 'primary'/>
-                </IconButton>
+                {this.returnClearOrDelete(task)}                
               </ListItemSecondaryAction>
             </ListItem>
           ))}

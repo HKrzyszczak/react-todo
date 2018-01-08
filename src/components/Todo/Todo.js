@@ -60,10 +60,7 @@ class ToDo extends Component {
                 <FilterBox changeFilter={this.setFilterText}/>
                 </div>
                 <TasksList 
-                    tasks = {this.state.tasks.filter(
-                        (el) => {
-                        return el.name.search(this.state.fiterText) !== -1; 
-                        })} />
+                    tasks = {this.state.tasks.filter(el => el.name.toUpperCase().search(this.state.fiterText.toUpperCase()) !== -1)} />
             </div>
         );
     }
