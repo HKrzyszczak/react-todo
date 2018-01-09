@@ -10,16 +10,17 @@ import firebase from 'firebase';
 
 const styles = theme => ({
     container: {
+      flexGrow: 1,
       display: 'flex',
       flexWrap: 'wrap',
     },
     textField: {
       marginLeft: theme.spacing.unit,
       marginRight: theme.spacing.unit,
-      width: 250,
+      width: '100%',
     },
     menu: {
-      width: 250,
+      width: '100%',
     },
 });
 class AddBox extends Component {

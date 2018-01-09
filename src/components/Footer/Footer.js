@@ -1,17 +1,45 @@
-import React, {Component} from 'react';
+import React from 'react';
 import Typography from 'material-ui/Typography';
+import PropTypes from 'prop-types';
+import { withStyles } from 'material-ui/styles';
+import SvgIcons from './SvgIcons';
 
-class Footer extends Component {
-    render() {
+
+const styles = {
+  root: {
+    display: 'flex',
+    alignItems: 'flex-end',
+    justifyContent: 'space-around',
+    width: '70%',
+  },
+};
+
+type ProvidedProps = {
+  classes: Object,
+  theme?: Object,
+};
+
+function  Footer(props: ProvidedProps) {
+    
         return (
+            <div className={props.classes.root}>
             <Typography type="body2" 
                         gutterBottom
                         align="center"
                         >
                 &copy; Henryk Krzyszczak
-            </Typography>               
+                
+            </Typography>
+            
+            <SvgIcons/>
+            </div>             
         )
-    }
+    
 }
 
-export default Footer;
+Footer.propTypes = {
+    classes: PropTypes.object.isRequired,
+  };
+
+
+  export default withStyles(styles)(Footer);

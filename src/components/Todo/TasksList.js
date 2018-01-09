@@ -13,8 +13,7 @@ import Typography from 'material-ui/Typography';
 
 const styles = theme => ({
   root: {
-    width: '100%',
-    maxWidth: 360,
+    width: '100%',    
     background: theme.palette.background.paper,
   },
 });
@@ -30,7 +29,8 @@ class TasksList extends React.Component {
   
   handleCheck2 = (e) => {}
 
-  handleCheck = (task) => {
+  handleCheck = (task, e) => {
+    e.stopPropagation();
     database.ref('/tasks/' + task.id)
           .set({
                 name: task.name,
@@ -61,6 +61,7 @@ class TasksList extends React.Component {
         <Typography 
               gutterBottom
               align="left"
+              style={{fontSize: 10, color: 'blue' }}
         >{dateTimeString}</Typography>
       </dim>
                             
@@ -111,7 +112,7 @@ class TasksList extends React.Component {
             >
               <Checkbox
                 checked={task.checked}
-                onClick={() => this.handleCheck(task)}                               
+                onClick={(e) => this.handleCheck(task, e)}                               
                 tabIndex={-1}
                 disableRipple
               />

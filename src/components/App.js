@@ -24,7 +24,8 @@ const App = (props) => {
             >
         <Grid 
             xs={12}
-            sm={6}>
+            sm={6}
+            align="center">
         <Card 
             className={classes.card}
             align="center">
