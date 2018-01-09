@@ -38,7 +38,8 @@ class EditBox extends Component {
     componentDidMount() {
       this.setState({
         inputText: this.props.task.name,
-        task: this.props.task,})
+        task: this.props.task,      
+      })
     }
     
     handleClickSave = () => {
@@ -46,7 +47,8 @@ class EditBox extends Component {
         database.ref('/tasks/' + this.state.task.id)
         .set( {
           name: this.state.inputText,
-          checked: this.state.task.checked,        
+          checked: this.state.task.checked,  
+          timeStamp: this.state.task.timeStamp,       
         })
         .then(() => {
             console.log('Saved :-)');

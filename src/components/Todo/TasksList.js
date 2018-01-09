@@ -8,6 +8,7 @@ import DeleteIcon from 'material-ui-icons/Delete';
 import Clear from 'material-ui-icons/Clear';
 import { database } from '../../firebase/firebase';
 import EditBox from './EditBox';
+import Typography from 'material-ui/Typography';
 
 
 const styles = theme => ({
@@ -26,12 +27,15 @@ class TasksList extends React.Component {
     database.ref('/tasks/' + id)
           .remove()
         };
+  
+  handleCheck2 = (e) => {}
 
   handleCheck = (task) => {
     database.ref('/tasks/' + task.id)
           .set({
                 name: task.name,
                 checked: !task.checked,
+                timeStamp: task.timeStamp,
           })
           .then(() => {
             console.log('Saved :-)');
@@ -46,9 +50,20 @@ class TasksList extends React.Component {
   }
 
   returnEditOrText = (task) => {
+    let dateFromTask =new Date(task.timeStamp);
+    let dateString = dateFromTask.getFullYear() + '-' + (dateFromTask.getMonth() + 1) + '-' + dateFromTask.getDate();
+    let timeString = dateFromTask.getHours() + ':' + dateFromTask.getMinutes() + ':' + dateFromTask.getSeconds();
+    let dateTimeString = dateString + ' ' + timeString;
     return  this.state.idEditedField !== task.id?(
-      <ListItemText primary={task.name}
+      <dim>
+        <ListItemText primary={task.name}
                             style={task.checked?{textDecoration: 'line-through', fontSize: 20}:{fontSize: 20} } />
+        <Typography 
+              gutterBottom
+              align="left"
+        >{dateTimeString}</Typography>
+      </dim>
+                            
     ):( <EditBox 
         task={task}
         resetEditId={this.resetIdEditedField}

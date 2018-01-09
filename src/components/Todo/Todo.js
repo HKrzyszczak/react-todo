@@ -23,6 +23,7 @@ class ToDo extends Component {
                     id: item,
                     name: items[item].name,
                     checked: items[item].checked,
+                    timeStamp: items[item].timeStamp,
                   });
                 }
                 this.setState({
@@ -32,22 +33,7 @@ class ToDo extends Component {
 
     setFilterText = (fiterText) => {
         this.setState({fiterText: fiterText})
-    };
-
-    handleToggleCheck = (id, checked) => {
-        database.ref('/tasks/' + id)
-        .set({
-              checked: !checked,
-        })
-        .then(() => {
-          console.log('Saved :-)');
-          this.setState({
-              inputText: '',
-          })
-      })
-      .catch(() => console.log('ERROR! Nothing saved!!!'))
-      };
-    
+    };    
 
     render() {
         return (

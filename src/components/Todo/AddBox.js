@@ -6,6 +6,7 @@ import Input, { InputLabel, InputAdornment } from 'material-ui/Input';
 import { FormControl } from 'material-ui/Form';
 import Save from 'material-ui-icons/Save';
 import { database } from "../../firebase/firebase";
+import firebase from 'firebase';
 
 const styles = theme => ({
     container: {
@@ -39,7 +40,8 @@ class AddBox extends Component {
         database.ref('/tasks')
         .push( {
           name: this.state.inputText,
-          checked: false,        
+          checked: false,  
+          timeStamp: firebase.database.ServerValue.TIMESTAMP,      
         })
         .then(() => {
             console.log('Saved :-)');
