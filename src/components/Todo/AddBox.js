@@ -65,7 +65,9 @@ class AddBox extends Component {
         const { classes } = this.props;
 
         return (
-            <FormControl className={classes.formControl}>
+            <FormControl 
+                className={classes.formControl}
+                fullWidth >
             <InputLabel htmlFor="inputField">Add task</InputLabel>
             <Input
               id="inputField"

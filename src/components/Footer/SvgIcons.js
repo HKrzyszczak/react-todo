@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import blue from 'material-ui/colors/blue';
 import SvgIcon from 'material-ui/SvgIcon';
+import Grid from 'material-ui/Grid';
 
 const styles = {
   root: {
@@ -43,7 +44,7 @@ const LinkedInIcon = props => (
 function SvgIcons(props) {
   const { classes } = props;
   return (
-    <div className={classes.root}>
+    <Grid >
     <a href="https://github.com/HKrzyszczak/">
       <GitHubIcon
         className={classes.iconHover}
@@ -64,7 +65,7 @@ function SvgIcons(props) {
         }}
       /> 
       </a>      
-    </div>
+    </Grid>
   );
 }
 

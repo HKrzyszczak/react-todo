@@ -15,10 +15,10 @@ const styles = theme => ({
     textField: {
       marginLeft: theme.spacing.unit,
       marginRight: theme.spacing.unit,
-      width: 250,
+      width: '100%',
     },
     menu: {
-      width: 250,
+      width: '80%',
     },
 });
 class EditBox extends Component {
@@ -69,7 +69,10 @@ class EditBox extends Component {
         const { classes } = this.props;
 
         return (
-            <FormControl className={classes.formControl}>
+            <FormControl 
+                className={classes.formControl}
+                fullWidth 
+                >
             <InputLabel htmlFor="inputField">Rename task</InputLabel>
             <Input
               id="inputField"

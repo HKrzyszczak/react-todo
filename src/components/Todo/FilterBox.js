@@ -14,10 +14,10 @@ const styles = theme => ({
     textField: {
       marginLeft: theme.spacing.unit,
       marginRight: theme.spacing.unit,
-      width: 200,
+      width: '100%',
     },
     menu: {
-      width: 200,
+      width: '100%',
     },
   });
 
@@ -50,7 +50,9 @@ class FilterBox extends Component {
         const { classes } = this.props;
 
         return (
-            <FormControl className={classes.formControl}>
+            <FormControl 
+                    className={classes.formControl}
+                    fullWidth >
             <InputLabel htmlFor="inputField">Find</InputLabel>
             <Input
               id="inputField"

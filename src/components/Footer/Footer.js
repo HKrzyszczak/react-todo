@@ -3,7 +3,7 @@ import Typography from 'material-ui/Typography';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import SvgIcons from './SvgIcons';
-
+import Grid from 'material-ui/Grid';
 
 const styles = {
   root: {
@@ -22,7 +22,7 @@ type ProvidedProps = {
 function  Footer(props: ProvidedProps) {
     
         return (
-            <div className={props.classes.root}>
+            <Grid xs={12}>
             <Typography type="body2" 
                         gutterBottom
                         align="center"
@@ -32,7 +32,7 @@ function  Footer(props: ProvidedProps) {
             </Typography>
             
             <SvgIcons/>
-            </div>             
+            </Grid>             
         )
     
 }

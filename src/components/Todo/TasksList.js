@@ -9,6 +9,7 @@ import Clear from 'material-ui-icons/Clear';
 import { database } from '../../firebase/firebase';
 import EditBox from './EditBox';
 import Typography from 'material-ui/Typography';
+import Grid from 'material-ui/Grid';
 
 
 const styles = theme => ({
@@ -55,7 +56,7 @@ class TasksList extends React.Component {
     let timeString = dateFromTask.getHours() + ':' + dateFromTask.getMinutes() + ':' + dateFromTask.getSeconds();
     let dateTimeString = dateString + ' ' + timeString;
     return  this.state.idEditedField !== task.id?(
-      <dim>
+      <Grid xs={12}>
         <ListItemText primary={task.name}
                             style={task.checked?{textDecoration: 'line-through', fontSize: 20}:{fontSize: 20} } />
         <Typography 
@@ -63,7 +64,7 @@ class TasksList extends React.Component {
               align="left"
               style={{fontSize: 10, color: 'blue' }}
         >{dateTimeString}</Typography>
-      </dim>
+      </Grid>
                             
     ):( <EditBox 
         task={task}
@@ -99,7 +100,7 @@ class TasksList extends React.Component {
     const { classes } = this.props;
 
     return (
-      <div className={classes.root}>
+      <Grid xs={12}>
         <List align="left">
           {this.props.tasks                
             .map(task => (
@@ -123,7 +124,7 @@ class TasksList extends React.Component {
             </ListItem>
           ))}
         </List>
-      </div>
+      </Grid>
     );
   }
 }
