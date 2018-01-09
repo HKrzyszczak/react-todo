@@ -19,11 +19,10 @@ class ToDo extends Component {
                 let items = snapshot.val();
                 let newState = [];
                 for (let item in items) {
-                  newState.push({
+                  newState.unshift({
                     id: item,
                     name: items[item].name,
                     checked: items[item].checked,
-                    
                   });
                 }
                 this.setState({
