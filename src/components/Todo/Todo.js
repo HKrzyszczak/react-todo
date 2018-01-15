@@ -3,6 +3,7 @@ import AddBox from './AddBox.js';
 import { database } from "../../firebase/firebase";
 import TasksList from './TasksList';
 import FilterBox from './FilterBox';
+import Grid from 'material-ui/Grid';
 
 class ToDo extends Component {
     constructor(props) {
@@ -37,16 +38,16 @@ class ToDo extends Component {
 
     render() {
         return (
-            <div>
-                <div>                       
+            <Grid xs={12}>
+                <Grid xs={12}>                       
                 <AddBox />
-                </div>
-                <div>
+                </Grid>
+                <Grid xs={12}>
                 <FilterBox changeFilter={this.setFilterText}/>
-                </div>
+                </Grid>
                 <TasksList 
                     tasks = {this.state.tasks.filter(el => el.name.toUpperCase().search(this.state.fiterText.toUpperCase()) !== -1)} />
-            </div>
+            </Grid>
         );
     }
 }

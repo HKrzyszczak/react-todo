@@ -28,10 +28,12 @@ class TasksList extends React.Component {
           .remove()
         };
   
-  handleCheck2 = (e) => {}
+  
 
   handleCheck = (task, e) => {
+    e.preventDefault()
     e.stopPropagation();
+    e.nativeEvent.stopImmediatePropagation();
     database.ref('/tasks/' + task.id)
           .set({
                 name: task.name,
