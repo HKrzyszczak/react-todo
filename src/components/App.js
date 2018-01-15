@@ -7,6 +7,11 @@ import { withStyles } from 'material-ui/styles';
 import Card, { CardContent } from 'material-ui/Card';
 import Grid from 'material-ui/Grid';
 
+import { connect } from 'react-redux';
+import Auth from './components/Login/Auth';
+import Inside from './components//Inside';
+import LoadingIndicator from './components/LoadingIndicator'
+
 const styles = theme => ({
     card: {
         minWidth: 275,
