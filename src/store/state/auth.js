@@ -17,7 +17,7 @@ export const init = () => (dispatch, getState) => {
 }
 
 export const logIn = (email, password) => (dispatch, getState) => {
-    if ( email.lenght > 0 && password.lenght > 0 ){
+    if ( email !== '' && password !=='') {
     dispatch(startLoading())
     auth.signInWithEmailAndPassword(email, password)
         .then(() => dispatch(stopLoading()))
