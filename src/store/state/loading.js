@@ -10,7 +10,7 @@ export const stopLoading = () => ({
 })
 
 const initialState = {
-    isLoading = false
+    isLoading: false
 }
 
 export default (state = initialState, action) => {

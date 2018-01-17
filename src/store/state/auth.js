@@ -1,4 +1,4 @@
-import { auth, googleProvider } from '../firebase'
+import { auth, googleProvider } from '../../firebase/firebase'
 import { startLoading, stopLoading } from './loading'
 
 const SET_USER_DATA = 'add/SET_USER_DATA'
@@ -17,10 +17,12 @@ export const init = () => (dispatch, getState) => {
 }
 
 export const logIn = (email, password) => (dispatch, getState) => {
+    if ( email.lenght > 0 && password.lenght > 0 ){
     dispatch(startLoading())
     auth.signInWithEmailAndPassword(email, password)
         .then(() => dispatch(stopLoading()))
         .catch((e) => alert('Coś poszło nie tak podczas logowania!'))
+    }
 }
 
 export const logInByGoogle = () => (dispatch, getState) => {

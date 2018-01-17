@@ -5,8 +5,8 @@ import IconButton from 'material-ui/IconButton';
 import Input, { InputLabel, InputAdornment } from 'material-ui/Input';
 import { FormControl } from 'material-ui/Form';
 import Save from 'material-ui-icons/Save';
-import { database } from "../../firebase/firebase";
-import firebase from 'firebase';
+import { connect } from 'react-redux';
+import { saveNew } from '../../store/state/tasks'
 
 const styles = theme => ({
     container: {
@@ -37,21 +37,10 @@ class AddBox extends Component {
     };
     
     handleClickAdd = () => {
-        if (this.state.inputText.length > 0 ) {
-        database.ref('/tasks')
-        .push( {
-          name: this.state.inputText,
-          checked: false,  
-          timeStamp: firebase.database.ServerValue.TIMESTAMP,      
-        })
-        .then(() => {
-            console.log('Saved :-)');
-            this.setState({
-                inputText: '',
-            })
-        })
-        .catch(() => console.log('ERROR! Nothing saved!!!'))
-        }
+        this.props.saveNew(this.state.inputText);
+        this.setState({
+            inputText: ''
+        })        
     };
     
     catchReturn = (ev) => {      
@@ -75,16 +64,16 @@ class AddBox extends Component {
               type="text"
               value={this.state.inputText}
               onChange={this.handleChange('inputText')}
-              onKeyPress={ this.catchReturn}
+              onKeyPress={ this.catchReturn }
               endAdornment={
                 <InputAdornment position="end">
-                  <IconButton
-                    onClick={this.handleClickAdd}                    
-                    onMouseDown={this.handleMouseDownAdd}
-                    color="primary"
-                  >
-                     <Save />
-                  </IconButton>
+                    <IconButton
+                        onClick={this.handleClickAdd}                    
+                        onMouseDown={this.handleMouseDownAdd}
+                        color="primary"
+                    >
+                        <Save />
+                    </IconButton>
                 </InputAdornment>
               }
             />
@@ -96,5 +85,11 @@ class AddBox extends Component {
 AddBox.propTypes = {
     classes: PropTypes.object.isRequired,
 };
+
+const mapDispatchToProps = dispatch => {
+    return {
+        saveNew: (name) => dispatch(saveNew(name))
+    }
+};
   
- export default withStyles(styles)(AddBox);
+ export default connect(null, mapDispatchToProps)(withStyles(styles)(AddBox));

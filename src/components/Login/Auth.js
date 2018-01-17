@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 
 import { connect } from 'react-redux'
-import { logIn, logInByGoogle } from '..store/state/auth'
+import { logIn, logInByGoogle } from '../../store/state/auth'
 
 import LogIn from './LogIn'
 
 class Auth extends Component {
     state = {
-        email: null,
-        pass: null
+        email: '',
+        pass: ''
     }
 
     render() {
@@ -31,7 +31,7 @@ class Auth extends Component {
 }
 
 const mapStateToProps = state => ({
-    user: state.auth.user
+    user: state.authReducer.user
 })
 
 const mapDispatchToProps = dispatch => ({

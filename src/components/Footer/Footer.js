@@ -22,7 +22,7 @@ type ProvidedProps = {
 function  Footer(props: ProvidedProps) {
     
         return (
-            <Grid xs={12}>
+            <Grid>
             <Typography type="body2" 
                         gutterBottom
                         align="center"
