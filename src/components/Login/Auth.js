@@ -1,9 +1,7 @@
-import React, { Component } from 'react'
-
-import { connect } from 'react-redux'
-import { logIn, logInByGoogle } from '../../store/state/auth'
-
-import LogIn from './LogIn'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { logIn, logInByGoogle } from '../../store/state/auth';
+import LogIn from './LogIn';
 
 class Auth extends Component {
     state = {

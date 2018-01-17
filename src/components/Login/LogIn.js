@@ -39,6 +39,9 @@ const LogIn = (props) => (
                 <Typography type="headline">
                     Zaloguj się!
                 </Typography>
+                <Typography type="headline">
+                    User testowy: a@a.pl pass: 123456
+                </Typography>
                 <TextField
                     placeholder={'E-mail'}
                     type={'email'}
