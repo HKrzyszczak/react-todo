@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Auth from './LogIn/Auth';
 import LoadingIndicator from './LoadingIndicator'
 import Inside from './Inside';
+import Notification from './Notyfication/Notification';
 
 const App = (props) => {
     return (
@@ -14,6 +15,7 @@ const App = (props) => {
         <LoadingIndicator isLoading={props.isLoading} />        
             <Auth>
                 <Inside />
+                <Notification />
             </Auth>
         </Grid>
     )

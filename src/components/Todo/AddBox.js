@@ -88,7 +88,7 @@ AddBox.propTypes = {
 
 const mapDispatchToProps = dispatch => {
     return {
-        saveNew: (name) => dispatch(saveNew(name))
+        saveNew: (name) => dispatch(saveNew(name))        
     }
 };
   

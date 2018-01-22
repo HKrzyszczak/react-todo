@@ -1,5 +1,6 @@
 import { database } from '../../firebase/firebase';
 import firebase  from 'firebase';
+import { showNotification } from './notyfication'
 
 const SET = 'tasks/SET'
 const UPDATE = 'tasks/UPDATE'
@@ -31,10 +32,8 @@ export const saveNew = (name) => (dispatch, getState) => {
       checked: false,  
       timeStamp: firebase.database.ServerValue.TIMESTAMP,      
     })
-    .then(() => {
-        console.log('Saved :-)');      
-    })
-    .catch(() => console.log('ERROR! Nothing saved!!!'))
+    .then(() =>  dispatch(showNotification('Saved :-)', 3000)))
+    .catch(() => dispatch(showNotification('ERROR! Nothing saved!!!', 3000)))
 
 
 

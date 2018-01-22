@@ -1,14 +1,16 @@
-import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
-import thunk from 'redux-thunk'
-import authReducer, {init as initAuth} from './state/auth'
-import loadingReducer from './state/loading'
-import tasksReducer, { init as initTasksListening } from './state/tasks'
+import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
+import thunk from 'redux-thunk';
+import authReducer, {init as initAuth} from './state/auth';
+import loadingReducer from './state/loading';
+import tasksReducer, { init as initTasksListening } from './state/tasks';
+import notificationReducer from './state/notyfication'
 
 
 const reducer = combineReducers({
     authReducer,
     loadingReducer,
-    tasksReducer
+    tasksReducer,
+    notificationReducer
 })
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
