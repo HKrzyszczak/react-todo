@@ -37,10 +37,12 @@ class AddBox extends Component {
     };
     
     handleClickAdd = () => {
+       
+if (this.state.inputText) {
         this.props.saveNew(this.state.inputText);
         this.setState({
             inputText: ''
-        })        
+        })};      
     };
     
     catchReturn = (ev) => {      

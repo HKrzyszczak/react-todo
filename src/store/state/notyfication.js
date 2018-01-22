@@ -14,8 +14,7 @@ export const hideNotification = () => ({
 const INITIAL_STATE = {
   notifications: {
     open: false,
-    message: '',
-    autohideDuration: 0
+    message: ''
   }  
 };
 
@@ -26,12 +25,16 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         notifications: {
           open: true,
-          message: action.message,
-          autohideDuration: action.autohideDuration
+          message: action.message
         }
       };
     case UI_HIDE_NOTIFICATION:
-      return INITIAL_STATE;    
+      return {
+        notifications: {
+          open: false,
+          message: ''
+        }
+      };    
     default:
       return state;
   }

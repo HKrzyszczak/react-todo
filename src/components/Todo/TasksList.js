@@ -10,8 +10,8 @@ import { database } from '../../firebase/firebase';
 import EditBox from './EditBox';
 import Typography from 'material-ui/Typography';
 import Grid from 'material-ui/Grid';
-import { } from 'react-redux';
-
+import { connect } from 'react-redux';
+import { deleteTask } from '../../store/state/tasks'
 
 const styles = theme => ({
   root: {
@@ -23,14 +23,7 @@ class TasksList extends React.Component {
   state = {
     idEditedField: '',
   };
-
-  handleDelete = (id) => {
-    database.ref('/tasks/' + id)
-          .remove()
-        };
-  
-  
-
+ 
   handleCheck = (task, e) => {
     e.preventDefault()
     e.stopPropagation();
@@ -79,7 +72,7 @@ class TasksList extends React.Component {
     return this.state.idEditedField !== task.id?(
       <IconButton 
                   aria-label='Delete'
-                  onClick={() => this.handleDelete(task.id)}
+                  onClick={() => this.props.deleteTask(task.id)}
                 >
                   <DeleteIcon color= 'primary'/>
                 </IconButton>
@@ -134,5 +127,11 @@ class TasksList extends React.Component {
 TasksList.propTypes = {
     classes: PropTypes.object.isRequired,
   };
+
+  const mapDispatchToProps = dispatch => {
+    return {
+        deleteTask: (id) => dispatch(deleteTask(id))        
+    }
+};
   
-  export default withStyles(styles)(TasksList);
+  export default connect(null, mapDispatchToProps)(withStyles(styles)(TasksList));

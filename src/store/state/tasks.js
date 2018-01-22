@@ -1,6 +1,10 @@
-import { database } from '../../firebase/firebase';
-import firebase  from 'firebase';
-import { showNotification } from './notyfication'
+import {
+    database
+} from '../../firebase/firebase';
+import firebase from 'firebase';
+import {
+    showNotification
+} from './notyfication'
 
 const SET = 'tasks/SET'
 const UPDATE = 'tasks/UPDATE'
@@ -24,31 +28,23 @@ export const save = (task) => {
     }
 }
 
+export const deleteTask = (id) => (dispatch, getState) => {
+    database.ref(`/tasks/${id}`)
+        .remove()
+        .then(() => dispatch(showNotification('Deleted :-(')))
+        .catch(() => dispatch(showNotification('ERROR! Nothing deleted!!!')))
+}
 
 export const saveNew = (name) => (dispatch, getState) => {
     database.ref('/tasks')
-    .push( {
-      name,
-      checked: false,  
-      timeStamp: firebase.database.ServerValue.TIMESTAMP,      
-    })
-    .then(() =>  dispatch(showNotification('Saved :-)', 3000)))
-    .catch(() => dispatch(showNotification('ERROR! Nothing saved!!!', 3000)))
-
-
-
-    // auth.signInWithEmailAndPassword(email, password)
-    //     .then(() => dispatch(stopLoading()))
-    //     .catch((e) => alert('Coś poszło nie tak podczas logowania!'))
+        .push({
+            name,
+            checked: false,
+            timeStamp: firebase.database.ServerValue.TIMESTAMP,
+        })
+        .then(() => dispatch(showNotification('Saved :-)')))
+        .catch(() => dispatch(showNotification('ERROR! Nothing saved!!!')))
 }
-
-// export const saveNew = (name) => {
-//     return {
-//         type: SAVE_NEW,
-//         name
-//     }
-
-// }
 
 export const init = () => (dispatch) => {
     database.ref('/tasks')
@@ -56,11 +52,15 @@ export const init = () => (dispatch) => {
             let items = snapshot.val();
             let newTasks = [];
             for (let item in items) {
-                const { name, checked, timeStamp } = items[item];
+                const {
+                    name,
+                    checked,
+                    timeStamp
+                } = items[item];
                 newTasks.unshift({
                     id: item,
                     name,
-                    checked,                   
+                    checked,
                     timeStamp
                 });
             }
@@ -68,7 +68,7 @@ export const init = () => (dispatch) => {
         })
 }
 
-export default (state = initialState, action) => {   
+export default (state = initialState, action) => {
     switch (action.type) {
         case SET:
             return {
