@@ -7,24 +7,24 @@ import Inside from './Inside';
 import Notification from './Notyfication/Notification';
 
 const App = (props) => {
-    return (
-        <Grid 
-            container
-            justify= "center"
-            >
-        <LoadingIndicator isLoading={props.isLoading} />        
-            <Auth>
-                <Inside />
-                <Notification />
-            </Auth>
-        </Grid>
-    )
+  return (
+    <Grid
+      container
+      justify="center"
+    >
+      <LoadingIndicator isLoading={props.isLoading}/>
+      <Auth>
+        <Inside/>
+        <Notification/>
+      </Auth>
+    </Grid>
+  )
 };
 
 const mapStateToProps = state => ({
-    isLoading: state.loadingReducer.isLoading
+  isLoading: state.loadingReducer.isLoading
 });
 
 export default connect(
-    mapStateToProps
-)(App);
+  mapStateToProps
+)( App );

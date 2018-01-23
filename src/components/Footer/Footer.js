@@ -14,32 +14,33 @@ const styles = {
   },
 };
 
-type ProvidedProps = {
+type
+ProvidedProps = {
   classes: Object,
-  theme?: Object,
+  theme? : Object,
 };
 
-function  Footer(props: ProvidedProps) {
-    
-        return (
-            <Grid>
-            <Typography type="body2" 
-                        gutterBottom
-                        align="center"
-                        >
-                &copy; Henryk Krzyszczak
-                
-            </Typography>
-            
-            <SvgIcons/>
-            </Grid>             
-        )
-    
+function Footer(props: ProvidedProps) {
+
+  return (
+    <Grid>
+      <Typography type="body2"
+                  gutterBottom
+                  align="center"
+      >
+        &copy; Henryk Krzyszczak
+
+      </Typography>
+
+      <SvgIcons/>
+    </Grid>
+  )
+
 }
 
 Footer.propTypes = {
-    classes: PropTypes.object.isRequired,
-  };
+  classes: PropTypes.object.isRequired,
+};
 
 
-  export default withStyles(styles)(Footer);
+export default withStyles( styles )( Footer );

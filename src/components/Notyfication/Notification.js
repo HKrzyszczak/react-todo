@@ -14,7 +14,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  handleClose: () => dispatch(hideNotification())
+  handleClose: () => dispatch( hideNotification() )
 });
 
 const styles = theme => ({
@@ -42,15 +42,15 @@ const Notification = (props) => (
         className={props.classes.close}
         onClick={props.handleClose}
       >
-        <CloseIcon />
+        <CloseIcon/>
       </IconButton>,
     ]}
   />
 );
 
-export default withStyles(styles)(
+export default withStyles( styles )(
   connect(
     mapStateToProps,
     mapDispatchToProps
-  )(Notification)
+  )( Notification )
 );

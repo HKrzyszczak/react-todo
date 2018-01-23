@@ -6,73 +6,77 @@ import TextField from 'material-ui/TextField'
 import Button from 'material-ui/Button'
 
 const styles = {
-    container: {
-        width: '100vw',
-        height: '100vh',
-    },
-    item: {
-        padding: '5%',
-        textAlign: 'center'
-    },
-    input: {
-        width: '100%',
-        marginBottom: '10px'
-    },
-    button: {
-        margin: '10px'
-    }
+  container: {
+    width: '100vw',
+    height: '100vh',
+  },
+  item: {
+    padding: '5%',
+    textAlign: 'center'
+  },
+  input: {
+    width: '100%',
+    marginBottom: '10px'
+  },
+  button: {
+    margin: '10px'
+  }
 }
 
 const LogIn = (props) => (
+  <Grid
+    style={styles.container}
+    container
+    alignItems={'center'}
+    justify={'space-around'}
+  >
     <Grid
-        style={styles.container}
-        container
-        alignItems={'center'}
-        justify={'space-around'}
+      item
+      xs={10}
+      sm={8}
     >
-        <Grid
-            item
-            xs={10}
-            sm={8}
-        >
-            <Paper style={styles.item}>
-                <Typography type="headline">
-                    Zaloguj się!
-                </Typography>
-                <Typography type="headline">
-                    User testowy: a@a.pl pass: 123456
-                </Typography>
-                <TextField
-                    placeholder={'E-mail'}
-                    type={'email'}
-                    style={styles.input}
-                    onChange={props.onEmailChange}
-                />
-                <TextField
-                    placeholder={'Password'}
-                    type={'password'}
-                    style={styles.input}
-                    onChange={props.onPassChange}
-                />
-                <Button
-                    raised
-                    color="primary"
-                    style={styles.button}
-                    onClick={props.onLogInClick}
-                >
-                    Zaloguj
-                </Button>
-                <Button
-                    raised
-                    color="accent"
-                    style={styles.button}
-                    onClick={props.onLogInByGoogleClick}
-                >
-                    Zaloguj Google+
-                </Button>
-            </Paper>
-        </Grid>
+      <Paper style={styles.item}>
+        <Typography type="headline">
+          Log in to Your Todo!
+        </Typography>
+        <Typography type="headline">
+          Test user: demo@demo.pl pass: 123456
+        </Typography>
+        <TextField
+          placeholder={'E-mail'}
+          type={'email'}
+          style={styles.input}
+          onChange={props.onEmailChange}
+        />
+        <TextField
+          placeholder={'Password'}
+          type={'password'}
+          style={styles.input}
+          onChange={props.onPassChange}
+        />
+        <div>
+          <Button
+            raised
+            color="primary"
+            style={styles.button}
+            onClick={props.onLogInClick}
+          >
+            Log in
+          </Button>
+        </div>
+        <div>
+          <Button
+            raised
+            color="primary"
+            style={styles.button}
+            onClick={props.onLogInByGoogleClick}
+          >
+            Log In by Google+
+          </Button>
+        </div>
+      </Paper>
     </Grid>
+  </Grid>
 )
 
 export default LogIn

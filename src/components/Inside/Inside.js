@@ -9,42 +9,42 @@ import Grid from 'material-ui/Grid';
 import { connect } from 'react-redux';
 
 const styles = theme => ({
-    card: {
-        minWidth: 275,
-        maxWidth: 500,
-      },
-    
-  });
+  card: {
+    minWidth: 275,
+    maxWidth: 500,
+  },
+
+});
 
 const Inside = (props) => {
-    const { classes } = props;
-    return (
-        <Grid 
-            container
-            justify= "center"
-            >        
-            <Card 
-                className={classes.card}
-                align="center">
-            <CardContent align="center">
-                    <Header/>
-                    <ToDo />                
-                    <Footer/>
-            </CardContent>
-            </Card>        
-        </Grid>
-    )
+  const { classes } = props;
+  return (
+    <Grid
+      container
+      justify="center"
+    >
+      <Card
+        className={classes.card}
+        align="center">
+        <CardContent align="center">
+          <Header/>
+          <ToDo/>
+          <Footer/>
+        </CardContent>
+      </Card>
+    </Grid>
+  )
 };
 
 
 Inside.propTypes = {
-    classes: PropTypes.object.isRequired,
-  };
+  classes: PropTypes.object.isRequired,
+};
 
 const mapStateToProps = state => ({
-    isLoading: state.loadingReducer.isLoading
-})
+  isLoading: state.loadingReducer.isLoading
+});
 
-  export default connect(
-    mapStateToProps
-)(withStyles(styles)(Inside));
+export default connect(
+  mapStateToProps
+)( withStyles( styles )( Inside ) );

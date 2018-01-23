@@ -15,7 +15,7 @@ const INITIAL_STATE = {
   notifications: {
     open: false,
     message: ''
-  }  
+  }
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -34,7 +34,7 @@ export default (state = INITIAL_STATE, action) => {
           open: false,
           message: ''
         }
-      };    
+      };
     default:
       return state;
   }
