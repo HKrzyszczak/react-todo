@@ -63,7 +63,9 @@ const LogIn = (props) => (
           >
             Log in
           </Button>
+          
         </div>
+        <div>or</div>
         <div>
           <Button
             raised

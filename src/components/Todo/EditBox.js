@@ -5,10 +5,8 @@ import IconButton from 'material-ui/IconButton';
 import Input, { InputLabel, InputAdornment } from 'material-ui/Input';
 import { FormControl } from 'material-ui/Form';
 import Save from 'material-ui-icons/Save';
-import { database } from "../../firebase/firebase";
-
 import { connect } from 'react-redux';
-import { saveNew } from '../../store/state/tasks'
+import { update as updateTask } from '../../store/state/tasks'
 
 const styles = theme => ({
   container: {
@@ -47,20 +45,11 @@ class EditBox extends Component {
   }
 
   handleClickSave = () => {
-    if ( this.state.inputText.length > 0 ) {
-      database.ref( '/tasks/' + this.state.task.id )
-        .set( {
-          name: this.state.inputText,
-          checked: this.state.task.checked,
-          timeStamp: this.state.task.timeStamp,
-        } )
-        .then( () => {
-          console.log( 'Saved :-)' );
-          this.props.resetEditId();
-        } )
-        .catch( () => console.log( 'ERROR! Nothing saved!!!' ) )
-    }
-  };
+      this.props.updateTask({
+        ...this.props.task,
+        name: this.state.inputText
+      })
+  }
 
   catchReturn = (ev) => {
     if ( ev.key === 'Enter' ) {
@@ -106,15 +95,15 @@ EditBox.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = () => {
-
-}
-
-const mapDispatchToProps = () => {
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateTask: (task) => dispatch( updateTask( task ) ),
+    
+  }
 
 }
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )( withStyles( styles )( EditBox ) );

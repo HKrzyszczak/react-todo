@@ -14,13 +14,21 @@ class Header extends Component {
                     align="center"
         >
           My tasks
+          <div>
+          <Typography type="subheading"
+                      gutterBottom
+                      align="left"
+                      onClick={this.props.signOut}>
+          Log out
+          
           <IconButton
             onClick={this.props.signOut}
-            onMouseDown={null}
             color="primary"
           >
-            <SignOut/>
+            <SignOut/>            
           </IconButton>
+          </Typography>
+          </div>
         </Typography>
 
       </div>

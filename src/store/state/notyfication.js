@@ -30,6 +30,7 @@ export default (state = INITIAL_STATE, action) => {
       };
     case UI_HIDE_NOTIFICATION:
       return {
+        ...state,
         notifications: {
           open: false,
           message: ''

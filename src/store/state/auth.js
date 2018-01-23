@@ -1,5 +1,6 @@
-import {auth, googleProvider} from '../../firebase/firebase'
-import {startLoading, stopLoading} from './loading'
+import { auth, googleProvider } from '../../firebase/firebase'
+import { showNotification } from './notyfication'
+import { startLoading, stopLoading } from './loading'
 
 const SET_USER_DATA = 'add/SET_USER_DATA'
 
@@ -21,7 +22,9 @@ export const logIn = (email, password) => (dispatch, getState) => {
     dispatch(startLoading())
     auth.signInWithEmailAndPassword(email, password)
       .then(() => dispatch(stopLoading()))
-      .catch((e) => alert('Coś poszło nie tak podczas logowania!'))
+      .catch((e) => {
+        dispatch(showNotification('Wrong user e-mail or password'))
+        dispatch(stopLoading())})
   }
 }
 

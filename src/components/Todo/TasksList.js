@@ -6,12 +6,11 @@ import Checkbox from 'material-ui/Checkbox';
 import IconButton from 'material-ui/IconButton';
 import DeleteIcon from 'material-ui-icons/Delete';
 import Clear from 'material-ui-icons/Clear';
-import { database } from '../../firebase/firebase';
 import EditBox from './EditBox';
 import Typography from 'material-ui/Typography';
 import Grid from 'material-ui/Grid';
 import { connect } from 'react-redux';
-import { deleteTask } from '../../store/state/tasks'
+import { deleteTask, setTaskToUpdate, clearTaskToUpdate, toggleCheck } from '../../store/state/tasks'
 
 const styles = theme => ({
   root: {
@@ -25,26 +24,8 @@ class TasksList extends React.Component {
     idEditedField: '',
   };
 
-  handleCheck = (task, e) => {
-    e.preventDefault()
-    e.stopPropagation();
-    e.nativeEvent.stopImmediatePropagation();
-    database.ref( '/tasks/' + task.id )
-      .set( {
-        name: task.name,
-        checked: !task.checked,
-        timeStamp: task.timeStamp,
-      } )
-      .then( () => {
-        console.log( 'Saved :-)' );
-      } )
-      .catch( () => console.log( 'ERROR! Nothing saved!!!' ) )
-  };
-
-  handleInlineEdit = (idEditedField) => {
-    this.setState( {
-      idEditedField: idEditedField,
-    } )
+  handleInlineEdit = (task) => {
+    this.props.setTaskToUpdate(task)   
   };
 
   returnEditOrText = (task) => {
@@ -52,7 +33,7 @@ class TasksList extends React.Component {
     let dateString = dateFromTask.getFullYear() + '-' + (dateFromTask.getMonth() + 1) + '-' + dateFromTask.getDate();
     let timeString = dateFromTask.getHours() + ':' + dateFromTask.getMinutes() + ':' + dateFromTask.getSeconds();
     let dateTimeString = dateString + ' ' + timeString;
-    return this.state.idEditedField !== task.id ? (
+    return this.props.taskToUpdate.id !== task.id ? (
       <Grid>
         <ListItemText primary={task.name}
                       style={task.checked ? { textDecoration: 'line-through', fontSize: 20 } : { fontSize: 20 }}/>
@@ -64,13 +45,13 @@ class TasksList extends React.Component {
       </Grid>
 
     ) : ( <EditBox
-      task={task}
-      resetEditId={this.resetIdEditedField}
+      task={this.props.taskToUpdate}
+      resetEditId={this.props.clearTaskToUpdate}
     />)
   };
 
   returnClearOrDelete = (task) => {
-    return this.state.idEditedField !== task.id ? (
+    return (this.props.taskToUpdate.id !== task.id) ? (
       <IconButton
         aria-label='Delete'
         onClick={() => this.props.deleteTask( task.id )}
@@ -80,17 +61,11 @@ class TasksList extends React.Component {
     ) : (
       <IconButton
         aria-label='Clear'
-        onClick={this.resetIdEditedField}
+        onClick={() => this.props.clearTaskToUpdate()}
       >
         <Clear color='primary'/>
       </IconButton>
     )
-  };
-
-  resetIdEditedField = () => {
-    this.setState( {
-      idEditedField: '',
-    } )
   };
 
   render() {
@@ -105,12 +80,12 @@ class TasksList extends React.Component {
                 key={task.id}
                 dense
                 button
-                onDoubleClick={() => this.handleInlineEdit( task.id )}
+                onDoubleClick={() => this.handleInlineEdit( task )}
                 className={classes.listItem}
               >
                 <Checkbox
                   checked={task.checked}
-                  onClick={(e) => this.handleCheck( task, e )}
+                  onClick={() => this.props.toggleCheck( task )}
                   tabIndex={-1}
                   disableRipple
                 />
@@ -130,10 +105,21 @@ TasksList.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-const mapDispatchToProps = dispatch => {
+const mapStateToProps = state => {
   return {
-    deleteTask: (id) => dispatch( deleteTask( id ) )
+    taskToUpdate: state.tasksReducer.taskToUpdate
   }
 };
 
-export default connect( null, mapDispatchToProps )( withStyles( styles )( TasksList ) );
+const mapDispatchToProps = dispatch => {
+  return {
+    deleteTask: (id) => dispatch( deleteTask( id ) ),
+    setTaskToUpdate: (task) => dispatch(setTaskToUpdate(task)),
+    clearTaskToUpdate: () => dispatch(clearTaskToUpdate()),
+    toggleCheck: (task) => dispatch(toggleCheck(task))
+  }
+};
+
+export default connect( 
+  mapStateToProps, 
+  mapDispatchToProps )( withStyles( styles )( TasksList ) );
