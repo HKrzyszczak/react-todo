@@ -23,7 +23,16 @@ const styles = {
   }
 }
 
-const LogIn = (props) => (
+const LogIn = (props) => {
+  
+const catchReturn = (ev) => {
+    if ( ev.key === 'Enter' ) {
+      ev.preventDefault();
+      props.onLogInClick();      
+    }
+  };
+
+return (
   <Grid
     style={styles.container}
     container
@@ -39,7 +48,7 @@ const LogIn = (props) => (
         <Typography type="headline">
           Log in to Your Todo!
         </Typography>
-        <Typography type="headline">
+        <Typography type="subheading">
           Test user: demo@demo.pl pass: 123456
         </Typography>
         <TextField
@@ -53,6 +62,7 @@ const LogIn = (props) => (
           type={'password'}
           style={styles.input}
           onChange={props.onPassChange}
+          onKeyPress={catchReturn}
         />
         <div>
           <Button
@@ -62,10 +72,11 @@ const LogIn = (props) => (
             onClick={props.onLogInClick}
           >
             Log in
-          </Button>
-          
+          </Button>          
         </div>
-        <div>or</div>
+        <Typography type="headline">
+          or
+        </Typography>
         <div>
           <Button
             raised
@@ -79,6 +90,6 @@ const LogIn = (props) => (
       </Paper>
     </Grid>
   </Grid>
-)
+)}
 
 export default LogIn

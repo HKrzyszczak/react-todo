@@ -10,9 +10,14 @@ import { connect } from 'react-redux';
 
 const styles = theme => ({
   card: {
-    minWidth: 275,
-    maxWidth: 500,
+    width: '100vw',
+    height: '100vh'
+    
   },
+  container: {
+    width: '90vw',
+    height: '100vh',
+  }    
 
 });
 
