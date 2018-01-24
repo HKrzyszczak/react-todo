@@ -30,7 +30,7 @@ export const logIn = (email, password) => (dispatch, getState) => {
 
 export const logInByGoogle = () => (dispatch, getState) => {
   dispatch(startLoading())
-  auth.signInWithPopup(googleProvider)
+  auth.signInWithRedirect(googleProvider)
     .then(() => dispatch(stopLoading()))
     .catch(() => dispatch(stopLoading()))
 }
