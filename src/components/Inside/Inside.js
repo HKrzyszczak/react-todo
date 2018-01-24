@@ -10,15 +10,8 @@ import { connect } from 'react-redux';
 
 const styles = theme => ({
   card: {
-    width: '100vw',
-    height: '100vh'
-    
-  },
-  container: {
-    width: '90vw',
-    height: '100vh',
-  }    
-
+    width: '100vw'
+  } 
 });
 
 const Inside = (props) => {
@@ -40,7 +33,6 @@ const Inside = (props) => {
     </Grid>
   )
 };
-
 
 Inside.propTypes = {
   classes: PropTypes.object.isRequired,
