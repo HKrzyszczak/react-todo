@@ -10,7 +10,8 @@ import EditBox from './EditBox';
 import Typography from 'material-ui/Typography';
 import Grid from 'material-ui/Grid';
 import { connect } from 'react-redux';
-import { deleteTask, setTaskToUpdate, clearTaskToUpdate, toggleCheck } from '../../store/state/tasks'
+import { deleteTask, setTaskToUpdate, clearTaskToUpdate, toggleCheck } from '../../store/state/tasks';
+import { showNotification } from '../../store/state/notyfication'
 
 const styles = theme => ({
   root: {
@@ -80,6 +81,7 @@ class TasksList extends React.Component {
                 key={task.id}
                 dense
                 button
+                onClick={() => this.props.showEditInfo()}
                 onDoubleClick={() => this.handleInlineEdit( task )}
                 className={classes.listItem}
               >
@@ -116,7 +118,8 @@ const mapDispatchToProps = dispatch => {
     deleteTask: (id) => dispatch( deleteTask( id ) ),
     setTaskToUpdate: (task) => dispatch(setTaskToUpdate(task)),
     clearTaskToUpdate: () => dispatch(clearTaskToUpdate()),
-    toggleCheck: (task) => dispatch(toggleCheck(task))
+    toggleCheck: (task) => dispatch(toggleCheck(task)),
+    showEditInfo: () => dispatch(showNotification("To edit double click"))
   }
 };
 

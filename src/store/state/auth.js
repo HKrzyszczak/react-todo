@@ -32,6 +32,7 @@ export const logInByGoogle = () => (dispatch, getState) => {
   dispatch(startLoading())
   auth.signInWithPopup(googleProvider)
     .then(() => dispatch(stopLoading()))
+    .catch(() => dispatch(stopLoading()))
 }
 
 export const signOut = () => (dispatch, getState) => {
